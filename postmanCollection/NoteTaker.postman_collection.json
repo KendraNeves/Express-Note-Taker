@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "0baafc4f-63cd-4165-aa1f-d907e4590945",
+		"name": "NoteTaker (Week 11 Homework)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Homepage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				},
+				"description": "this in an html route to get the home page, index.html"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Notes Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/notes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"notes"
+					]
+				},
+				"description": "this is an html route to get the notes.html page."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Notes Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/notes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"notes"
+					]
+				},
+				"description": "this is an api route to get data about the notes from the backend. if there are notes, it will return an array of note objects."
+			},
+			"response": []
+		},
+		{
+			"name": "Post a new notes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"mulch the lawn\",\n    \"text\": \"do it this weekend; it's going to be lovely outside.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/notes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"notes"
+					]
+				},
+				"description": "this is an api route to post new notes. the json object is sent in the body as raw JSON. also note that you don't need to add an id to the notes object; the id is being added by the backend."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a note by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/notes/048388e0-753f-11ea-ab2b-e525a2fd6424",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"notes",
+						"048388e0-753f-11ea-ab2b-e525a2fd6424"
+					]
+				},
+				"description": "this is an api route to delete a note by id. to find an id, do a get on /api/notes, find an id of a note you want to delete and add it to th eend of the path, like so: http://localhost:3000/api/notes/id"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
