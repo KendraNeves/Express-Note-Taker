@@ -6,6 +6,9 @@ router.get("/notes", function(request, response) {
     response.sendFile(path.join(__dirname, "../public/notes.html"));
 });
 
-
+router.get("*", function(request, response) {
+    // send index file
+    response.sendFile(path.join(__dirname, "../public/index.html"));
+})
 
 module.exports = router;
