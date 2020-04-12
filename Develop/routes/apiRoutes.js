@@ -1,14 +1,19 @@
-const router = require("express").Router();
-const db = require("../db/db.json");
+var express = require('express');
+var router = express.Router();
+const path = require("path");
+const store = require("../js/store");
 
-router.get("/notes", function(request, response) {
-  // get a note
-  // see 15-HotRestaurant/Solved for more info
-  response.send(db);
+// get
+router.get("/notes", function(req, res) {
+  return res.json(store.getNotes());
 });
 
-// other apis here
+// post
+router.post("/notes", function(req, res){
+  let newNote = req.body;
+  newNote = store.writeNote(newNote);
 
-// /api/notes/:id
+  return res.json(newNote);
+});
 
 module.exports = router;
