@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const path = require("path");
 const store = require("../js/store");
 
 // get
@@ -14,6 +13,12 @@ router.post("/notes", function(req, res){
   newNote = store.writeNote(newNote);
 
   return res.json(newNote);
+});
+
+// delete
+router.delete("/notes/:id", function(req, res){
+  let noteId = req.params.id;
+  store.deleteNote(noteId);
 });
 
 module.exports = router;

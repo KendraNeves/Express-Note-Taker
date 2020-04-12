@@ -1,18 +1,16 @@
 // a class to read, write & delete notes.
 
 const fs = require('fs');
-const dbFilePath = "db/db.json";
-
-const util = require("util");
-
-
+const path = require("path");
+const dbFilePath = path.join(__dirname, "../db/db.json");
 
 // This package will be used to generate our unique ids. https://www.npmjs.com/package/uuid
 const uuidv4 = require('uuid').v4;
 
 let store = {
    "getNotes": () => {
-      return db;
+      let db = fs.readFileSync(dbFilePath);
+      return JSON.parse(db);
    },
    
    "writeNote": (newNote) => {
@@ -28,10 +26,13 @@ let store = {
          if (err) {
             throw err;
          }
+
          let db = JSON.parse(data);
          db.push(newNote);
 
-         fs.writeFile(dbFilePath, JSON.stringify(db), (err) => {if (err) {throw err;}});
+         fs.writeFile(dbFilePath, JSON.stringify(db), (err) => {
+            if (err) {throw err;}
+         });
       });
 
       return newNote;
@@ -39,6 +40,21 @@ let store = {
 
    "deleteNote": (noteId) => {
       // delete specified note
+
+      fs.readFile(dbFilePath, function (err, data) {
+         if (err) {
+            throw err;
+         }
+
+         let db = JSON.parse(data);
+         db = db.filter((note) => {
+            return note.id != noteId;
+         });
+
+         fs.writeFile(dbFilePath, JSON.stringify(db), (err) => {
+            if (err) {throw err;}
+         });
+      });
    }
 }
    
